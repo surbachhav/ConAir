@@ -1,0 +1,66 @@
+# Assignment 2 reflection
+
+## Submitter metadata
+
+Author: Surabhi Bachhav (sb2673)
+
+Hours spent working on this assignment: 15.0 hrs
+
+## Verification questions
+
+Using the `Main` application, perform the following actions on a fresh
+flight management system:
+
+   1. Add a flight from "ORD" to "SYR" that departs at 4:43 PM, takes
+      2 hours and 3 minutes, and travels a distance of 383 miles.
+
+   2. Add a passenger with firstname "Rick" and lastname "Oryctodromeus"
+      to the flight that you just added in (1.)
+      
+1. What commands did you type to perform these actions?
+
+   Answer: addflight ORD SYR 4 43 123 383
+           addpassenger Rick Oryctodromeus
+           reserveflight 0 0
+
+2. What is printed when you subsequently enter the command
+   `listpassengers`?
+
+   Answer: The list of unique ConAir passengers:
+           {
+           0: Rick Oryctodromeus
+           }
+
+## Reflection questions
+
+1. Describe a program behavioral bug that was caught by a unit test
+   over the course of your completion of this assignment.  In what way
+   did your implementation deviate from the specification?  How soon
+   after implementing the method did you catch your mistake?  Did any
+   other code need to change to fix the mistake that tests helped you
+   catch?
+
+   Alternatively, if all of your method implementations passed all of
+   their tests on the first try (this is rare, even for professionals
+   or experienced programmers, including your Professors), describe a
+   hypothetical bug in one of the ConAir's methods that your test
+   suite would _not_ catch.  Then provide a test scenario description
+   that would cover your hypothetical bug.  Would line coverage
+   analysis be an effective way to detect this gap in your testing?
+
+   Answer: While implementing formatDeparture(), I forgot to pad the zeros if the departureMin < 10.
+   I caught my mistake after passing in 5 and 0 for the departureHour and departureMin parameters and
+   the String "5:0 AM" being returned; this was after I had completed writing the method and during
+   my first test case. The only code that had to be changed was creating a zero variable to add to my
+   return String if departureMin < 10.
+
+2. Suppose that, instead of using IDs, the `Main` application prompted
+   users for a passenger's name, then constructed a new `Passenger`
+   object that it would pass to its `ConAir` instance.  Give an example
+   of one issue that implementers might run into if clients provide
+   their own `Passenger` objects like this.
+
+   Answer: Passengers with the same name could be mistaken; thus, when printing out ConAir passengers
+   they may not be considered unique. Using IDs reduces this confusion. If users are prompted for names
+   they could also put whitespace before and after the name or have variation in their entry (for ex:
+   providing only a first name as opposed to both a first and last name).
